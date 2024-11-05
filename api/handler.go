@@ -1,4 +1,4 @@
-package main
+package handler
 
 import (
 	"net/http"
@@ -9,17 +9,18 @@ import (
 	"github.com/umenerineri/hai-viewer-backend/presentation/controller"
 )
 
-var Handler http.Handler
-
-func init() {
+// Handler は http.Handler を返す関数として定義
+func Handler(w http.ResponseWriter, r *http.Request) {
 	hdl, err := ogen.NewServer(
 		&controller.HaiHandler{},
 		&config.HaiSecurityHandler{},
 	)
 
 	if err != nil {
-		panic("Failed to initialize server: " + err.Error())
+		http.Error(w, "Failed to initialize server: "+err.Error(), http.StatusInternalServerError)
+		return
 	}
 
-	Handler = middleware.EnableCORS(middleware.LoggingMiddleware(hdl))
+	// ハンドラーをラップしてリクエストを処理
+	middleware.EnableCORS(middleware.LoggingMiddleware(hdl)).ServeHTTP(w, r)
 }
