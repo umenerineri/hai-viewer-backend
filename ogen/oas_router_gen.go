@@ -48,9 +48,9 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			break
 		}
 		switch elem[0] {
-		case '/': // Prefix: "/view"
+		case '/': // Prefix: "/api/handler/view"
 			origElem := elem
-			if l := len("/view"); len(elem) >= l && elem[0:l] == "/view" {
+			if l := len("/api/handler/view"); len(elem) >= l && elem[0:l] == "/api/handler/view" {
 				elem = elem[l:]
 			} else {
 				break
@@ -60,7 +60,7 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 				// Leaf node.
 				switch r.Method {
 				case "GET":
-					s.handleViewGetRequest([0]string{}, elemIsEscaped, w, r)
+					s.handleAPIHandlerViewGetRequest([0]string{}, elemIsEscaped, w, r)
 				default:
 					s.notAllowed(w, r, "GET")
 				}
@@ -149,9 +149,9 @@ func (s *Server) FindPath(method string, u *url.URL) (r Route, _ bool) {
 			break
 		}
 		switch elem[0] {
-		case '/': // Prefix: "/view"
+		case '/': // Prefix: "/api/handler/view"
 			origElem := elem
-			if l := len("/view"); len(elem) >= l && elem[0:l] == "/view" {
+			if l := len("/api/handler/view"); len(elem) >= l && elem[0:l] == "/api/handler/view" {
 				elem = elem[l:]
 			} else {
 				break
@@ -161,10 +161,10 @@ func (s *Server) FindPath(method string, u *url.URL) (r Route, _ bool) {
 				// Leaf node.
 				switch method {
 				case "GET":
-					r.name = "ViewGet"
+					r.name = "APIHandlerViewGet"
 					r.summary = "Drawing Viewer Page"
 					r.operationID = ""
-					r.pathPattern = "/view"
+					r.pathPattern = "/api/handler/view"
 					r.args = args
 					r.count = 0
 					return r, true

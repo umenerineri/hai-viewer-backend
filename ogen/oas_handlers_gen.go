@@ -19,19 +19,19 @@ import (
 	"github.com/ogen-go/ogen/ogenerrors"
 )
 
-// handleViewGetRequest handles GET /view operation.
+// handleAPIHandlerViewGetRequest handles GET /api/handler/view operation.
 //
 // Viewer Page for human AI drawings.
 //
-// GET /view
-func (s *Server) handleViewGetRequest(args [0]string, argsEscaped bool, w http.ResponseWriter, r *http.Request) {
+// GET /api/handler/view
+func (s *Server) handleAPIHandlerViewGetRequest(args [0]string, argsEscaped bool, w http.ResponseWriter, r *http.Request) {
 	otelAttrs := []attribute.KeyValue{
 		semconv.HTTPMethodKey.String("GET"),
-		semconv.HTTPRouteKey.String("/view"),
+		semconv.HTTPRouteKey.String("/api/handler/view"),
 	}
 
 	// Start a span for this request.
-	ctx, span := s.cfg.Tracer.Start(r.Context(), "ViewGet",
+	ctx, span := s.cfg.Tracer.Start(r.Context(), "APIHandlerViewGet",
 		trace.WithAttributes(otelAttrs...),
 		serverSpanKind,
 	)
@@ -62,7 +62,7 @@ func (s *Server) handleViewGetRequest(args [0]string, argsEscaped bool, w http.R
 		}
 		err          error
 		opErrContext = ogenerrors.OperationContext{
-			Name: "ViewGet",
+			Name: "APIHandlerViewGet",
 			ID:   "",
 		}
 	)
@@ -70,7 +70,7 @@ func (s *Server) handleViewGetRequest(args [0]string, argsEscaped bool, w http.R
 		type bitset = [1]uint8
 		var satisfied bitset
 		{
-			sctx, ok, err := s.securityApiKeyAuth(ctx, "ViewGet", r)
+			sctx, ok, err := s.securityApiKeyAuth(ctx, "APIHandlerViewGet", r)
 			if err != nil {
 				err = &ogenerrors.SecurityError{
 					OperationContext: opErrContext,
@@ -113,11 +113,11 @@ func (s *Server) handleViewGetRequest(args [0]string, argsEscaped bool, w http.R
 		}
 	}
 
-	var response ViewGetRes
+	var response APIHandlerViewGetRes
 	if m := s.cfg.Middleware; m != nil {
 		mreq := middleware.Request{
 			Context:          ctx,
-			OperationName:    "ViewGet",
+			OperationName:    "APIHandlerViewGet",
 			OperationSummary: "Drawing Viewer Page",
 			OperationID:      "",
 			Body:             nil,
@@ -128,7 +128,7 @@ func (s *Server) handleViewGetRequest(args [0]string, argsEscaped bool, w http.R
 		type (
 			Request  = struct{}
 			Params   = struct{}
-			Response = ViewGetRes
+			Response = APIHandlerViewGetRes
 		)
 		response, err = middleware.HookMiddleware[
 			Request,
@@ -139,12 +139,12 @@ func (s *Server) handleViewGetRequest(args [0]string, argsEscaped bool, w http.R
 			mreq,
 			nil,
 			func(ctx context.Context, request Request, params Params) (response Response, err error) {
-				response, err = s.h.ViewGet(ctx)
+				response, err = s.h.APIHandlerViewGet(ctx)
 				return response, err
 			},
 		)
 	} else {
-		response, err = s.h.ViewGet(ctx)
+		response, err = s.h.APIHandlerViewGet(ctx)
 	}
 	if err != nil {
 		if errRes, ok := errors.Into[*ErrRespStatusCode](err); ok {
@@ -163,7 +163,7 @@ func (s *Server) handleViewGetRequest(args [0]string, argsEscaped bool, w http.R
 		return
 	}
 
-	if err := encodeViewGetResponse(response, w, span); err != nil {
+	if err := encodeAPIHandlerViewGetResponse(response, w, span); err != nil {
 		defer recordError("EncodeResponse", err)
 		if !errors.Is(err, ht.ErrInternalServerErrorResponse) {
 			s.cfg.ErrorHandler(ctx, w, r, err)

@@ -28,10 +28,6 @@ type Firebase struct {
 }
 
 func Load() (*Config, error) {
-	// .env ファイルを読み込む
-	if _, err := os.Stat(".env"); os.IsNotExist(err) {
-		log.Fatalf(".env file does not exist: %v", err)
-	}
 
 	// .env ファイルが存在する場合にのみ読み込む
 	err := godotenv.Load()

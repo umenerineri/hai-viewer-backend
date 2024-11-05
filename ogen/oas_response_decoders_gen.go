@@ -14,7 +14,7 @@ import (
 	"github.com/ogen-go/ogen/validate"
 )
 
-func decodeViewGetResponse(resp *http.Response) (res ViewGetRes, _ error) {
+func decodeAPIHandlerViewGetResponse(resp *http.Response) (res APIHandlerViewGetRes, _ error) {
 	switch resp.StatusCode {
 	case 200:
 		// Code 200.
@@ -30,7 +30,7 @@ func decodeViewGetResponse(resp *http.Response) (res ViewGetRes, _ error) {
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response ViewGetOK
+			var response APIHandlerViewGetOK
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -74,7 +74,7 @@ func decodeViewGetResponse(resp *http.Response) (res ViewGetRes, _ error) {
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response ViewGetBadRequest
+			var response APIHandlerViewGetBadRequest
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -109,7 +109,7 @@ func decodeViewGetResponse(resp *http.Response) (res ViewGetRes, _ error) {
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response ViewGetNotFound
+			var response APIHandlerViewGetNotFound
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -132,7 +132,7 @@ func decodeViewGetResponse(resp *http.Response) (res ViewGetRes, _ error) {
 		}
 	case 500:
 		// Code 500.
-		return &ViewGetInternalServerError{}, nil
+		return &APIHandlerViewGetInternalServerError{}, nil
 	}
 	// Convenient error response.
 	defRes, err := func() (res *ErrRespStatusCode, err error) {

@@ -4,10 +4,10 @@ info:
     description: API specification for interactions between Frontend, Backend, and Cloud Storage.
     version: 1.0.0
 servers:
-    - url: https://frontend.example.com
-      description: Frontend Server
+  - url: /api/handler
+    description: Base path for all endpoints
 paths:
-    /view:
+    /api/handler/view:
         get:
             summary: Drawing Viewer Page
             description: Viewer Page for human AI drawings. 

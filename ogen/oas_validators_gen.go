@@ -8,7 +8,7 @@ import (
 	"github.com/ogen-go/ogen/validate"
 )
 
-func (s *ViewGetOK) Validate() error {
+func (s *APIHandlerViewGetOK) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}

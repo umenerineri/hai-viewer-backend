@@ -13,9 +13,9 @@ import (
 	ht "github.com/ogen-go/ogen/http"
 )
 
-func encodeViewGetResponse(response ViewGetRes, w http.ResponseWriter, span trace.Span) error {
+func encodeAPIHandlerViewGetResponse(response APIHandlerViewGetRes, w http.ResponseWriter, span trace.Span) error {
 	switch response := response.(type) {
-	case *ViewGetOK:
+	case *APIHandlerViewGetOK:
 		w.Header().Set("Content-Type", "application/json; charset=utf-8")
 		w.WriteHeader(200)
 		span.SetStatus(codes.Ok, http.StatusText(200))
@@ -28,7 +28,7 @@ func encodeViewGetResponse(response ViewGetRes, w http.ResponseWriter, span trac
 
 		return nil
 
-	case *ViewGetBadRequest:
+	case *APIHandlerViewGetBadRequest:
 		w.Header().Set("Content-Type", "application/json; charset=utf-8")
 		w.WriteHeader(400)
 		span.SetStatus(codes.Error, http.StatusText(400))
@@ -41,7 +41,7 @@ func encodeViewGetResponse(response ViewGetRes, w http.ResponseWriter, span trac
 
 		return nil
 
-	case *ViewGetNotFound:
+	case *APIHandlerViewGetNotFound:
 		w.Header().Set("Content-Type", "application/json; charset=utf-8")
 		w.WriteHeader(404)
 		span.SetStatus(codes.Error, http.StatusText(404))
@@ -54,7 +54,7 @@ func encodeViewGetResponse(response ViewGetRes, w http.ResponseWriter, span trac
 
 		return nil
 
-	case *ViewGetInternalServerError:
+	case *APIHandlerViewGetInternalServerError:
 		w.WriteHeader(500)
 		span.SetStatus(codes.Error, http.StatusText(500))
 
