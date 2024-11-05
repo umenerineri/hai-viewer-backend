@@ -8,12 +8,12 @@ import (
 
 // Handler handles operations described by OpenAPI v3 specification.
 type Handler interface {
-	// ViewGet implements GET /view operation.
+	// APIHandlerViewGet implements GET /api/handler/view operation.
 	//
 	// Viewer Page for human AI drawings.
 	//
-	// GET /view
-	ViewGet(ctx context.Context) (ViewGetRes, error)
+	// GET /api/handler/view
+	APIHandlerViewGet(ctx context.Context) (APIHandlerViewGetRes, error)
 	// NewError creates *ErrRespStatusCode from error returned by handler.
 	//
 	// Used for common default response.

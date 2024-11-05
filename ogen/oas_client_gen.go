@@ -22,12 +22,12 @@ import (
 
 // Invoker invokes operations described by OpenAPI v3 specification.
 type Invoker interface {
-	// ViewGet invokes GET /view operation.
+	// APIHandlerViewGet invokes GET /api/handler/view operation.
 	//
 	// Viewer Page for human AI drawings.
 	//
-	// GET /view
-	ViewGet(ctx context.Context) (ViewGetRes, error)
+	// GET /api/handler/view
+	APIHandlerViewGet(ctx context.Context) (APIHandlerViewGetRes, error)
 }
 
 // Client implements OAS client.
@@ -84,20 +84,20 @@ func (c *Client) requestURL(ctx context.Context) *url.URL {
 	return u
 }
 
-// ViewGet invokes GET /view operation.
+// APIHandlerViewGet invokes GET /api/handler/view operation.
 //
 // Viewer Page for human AI drawings.
 //
-// GET /view
-func (c *Client) ViewGet(ctx context.Context) (ViewGetRes, error) {
-	res, err := c.sendViewGet(ctx)
+// GET /api/handler/view
+func (c *Client) APIHandlerViewGet(ctx context.Context) (APIHandlerViewGetRes, error) {
+	res, err := c.sendAPIHandlerViewGet(ctx)
 	return res, err
 }
 
-func (c *Client) sendViewGet(ctx context.Context) (res ViewGetRes, err error) {
+func (c *Client) sendAPIHandlerViewGet(ctx context.Context) (res APIHandlerViewGetRes, err error) {
 	otelAttrs := []attribute.KeyValue{
 		semconv.HTTPMethodKey.String("GET"),
-		semconv.HTTPRouteKey.String("/view"),
+		semconv.HTTPRouteKey.String("/api/handler/view"),
 	}
 
 	// Run stopwatch.
@@ -112,7 +112,7 @@ func (c *Client) sendViewGet(ctx context.Context) (res ViewGetRes, err error) {
 	c.requests.Add(ctx, 1, metric.WithAttributes(otelAttrs...))
 
 	// Start a span for this request.
-	ctx, span := c.cfg.Tracer.Start(ctx, "ViewGet",
+	ctx, span := c.cfg.Tracer.Start(ctx, "APIHandlerViewGet",
 		trace.WithAttributes(otelAttrs...),
 		clientSpanKind,
 	)
@@ -130,7 +130,7 @@ func (c *Client) sendViewGet(ctx context.Context) (res ViewGetRes, err error) {
 	stage = "BuildURL"
 	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
-	pathParts[0] = "/view"
+	pathParts[0] = "/api/handler/view"
 	uri.AddPathParts(u, pathParts[:]...)
 
 	stage = "EncodeRequest"
@@ -144,7 +144,7 @@ func (c *Client) sendViewGet(ctx context.Context) (res ViewGetRes, err error) {
 		var satisfied bitset
 		{
 			stage = "Security:ApiKeyAuth"
-			switch err := c.securityApiKeyAuth(ctx, "ViewGet", r); {
+			switch err := c.securityApiKeyAuth(ctx, "APIHandlerViewGet", r); {
 			case err == nil: // if NO error
 				satisfied[0] |= 1 << 0
 			case errors.Is(err, ogenerrors.ErrSkipClientSecurity):
@@ -180,7 +180,7 @@ func (c *Client) sendViewGet(ctx context.Context) (res ViewGetRes, err error) {
 	defer resp.Body.Close()
 
 	stage = "DecodeResponse"
-	result, err := decodeViewGetResponse(resp)
+	result, err := decodeAPIHandlerViewGetResponse(resp)
 	if err != nil {
 		return res, errors.Wrap(err, "decode response")
 	}

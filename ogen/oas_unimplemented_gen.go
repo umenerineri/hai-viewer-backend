@@ -13,12 +13,12 @@ type UnimplementedHandler struct{}
 
 var _ Handler = UnimplementedHandler{}
 
-// ViewGet implements GET /view operation.
+// APIHandlerViewGet implements GET /api/handler/view operation.
 //
 // Viewer Page for human AI drawings.
 //
-// GET /view
-func (UnimplementedHandler) ViewGet(ctx context.Context) (r ViewGetRes, _ error) {
+// GET /api/handler/view
+func (UnimplementedHandler) APIHandlerViewGet(ctx context.Context) (r APIHandlerViewGetRes, _ error) {
 	return r, ht.ErrNotImplemented
 }
 
