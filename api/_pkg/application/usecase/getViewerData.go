@@ -3,8 +3,8 @@ package usecase
 import (
 	"fmt"
 
-	"github.com/umenerineri/hai-viewer-backend/domain/entity/user"
-	"github.com/umenerineri/hai-viewer-backend/domain/repository"
+	"github.com/umenerineri/hai-viewer-backend/api/_pkg/domain/entity/user"
+	"github.com/umenerineri/hai-viewer-backend/api/_pkg/domain/repository"
 )
 
 type GetViewDataUsecase struct {

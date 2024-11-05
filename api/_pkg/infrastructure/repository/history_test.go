@@ -6,9 +6,9 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	config "github.com/umenerineri/hai-viewer-backend/config"
-	"github.com/umenerineri/hai-viewer-backend/domain/entity/history"
-	impl_repository "github.com/umenerineri/hai-viewer-backend/infrastructure/repository"
+	config "github.com/umenerineri/hai-viewer-backend/api/_pkg/config"
+	"github.com/umenerineri/hai-viewer-backend/api/_pkg/domain/entity/history"
+	impl_repository "github.com/umenerineri/hai-viewer-backend/api/_pkg/infrastructure/repository"
 )
 
 func TestImplHistoryRepository_Integration(t *testing.T) {

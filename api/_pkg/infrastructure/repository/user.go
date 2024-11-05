@@ -8,10 +8,10 @@ import (
 
 	"cloud.google.com/go/firestore"
 	"github.com/google/uuid"
-	config "github.com/umenerineri/hai-viewer-backend/config"
-	domain "github.com/umenerineri/hai-viewer-backend/domain"
-	"github.com/umenerineri/hai-viewer-backend/domain/entity/user"
-	"github.com/umenerineri/hai-viewer-backend/infrastructure/impl/database"
+	config "github.com/umenerineri/hai-viewer-backend/api/_pkg/config"
+	domain "github.com/umenerineri/hai-viewer-backend/api/_pkg/domain"
+	"github.com/umenerineri/hai-viewer-backend/api/_pkg/domain/entity/user"
+	"github.com/umenerineri/hai-viewer-backend/api/_pkg/infrastructure/impl/database"
 )
 
 type ImplUserRepository struct {

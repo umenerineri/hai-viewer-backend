@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"cloud.google.com/go/firestore"
-	domain "github.com/umenerineri/hai-viewer-backend/domain"
+	domain "github.com/umenerineri/hai-viewer-backend/api/_pkg/domain"
 
 	"google.golang.org/api/iterator"
 )

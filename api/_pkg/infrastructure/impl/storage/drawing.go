@@ -11,7 +11,7 @@ import (
 
 	cs "cloud.google.com/go/storage"
 	"firebase.google.com/go/v4/storage"
-	config "github.com/umenerineri/hai-viewer-backend/config"
+	config "github.com/umenerineri/hai-viewer-backend/api/_pkg/config"
 )
 
 func ImplGenerateSignedUrl(client *storage.Client, fileName string, method string) (string, error) {

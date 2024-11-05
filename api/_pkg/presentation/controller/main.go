@@ -4,7 +4,7 @@ import (
 	"context"
 	"log"
 
-	ogen "github.com/umenerineri/hai-viewer-backend/ogen"
+	ogen "github.com/umenerineri/hai-viewer-backend/api/_pkg/ogen"
 )
 
 type HaiHandler struct{}

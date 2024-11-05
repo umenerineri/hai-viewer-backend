@@ -1,6 +1,6 @@
 package repository
 
-import "github.com/umenerineri/hai-viewer-backend/domain/entity/user"
+import "github.com/umenerineri/hai-viewer-backend/api/_pkg/domain/entity/user"
 
 type UserRepository interface {
 	Create(user user.User) error

@@ -6,9 +6,9 @@ import (
 
 	"cloud.google.com/go/firestore"
 
-	config "github.com/umenerineri/hai-viewer-backend/config"
-	"github.com/umenerineri/hai-viewer-backend/domain/entity/history"
-	"github.com/umenerineri/hai-viewer-backend/infrastructure/impl/database"
+	config "github.com/umenerineri/hai-viewer-backend/api/_pkg/config"
+	"github.com/umenerineri/hai-viewer-backend/api/_pkg/domain/entity/history"
+	"github.com/umenerineri/hai-viewer-backend/api/_pkg/infrastructure/impl/database"
 )
 
 type ImplHistoryRepository struct {

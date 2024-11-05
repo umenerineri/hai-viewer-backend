@@ -1,6 +1,6 @@
 package repository
 
-import "github.com/umenerineri/hai-viewer-backend/domain/entity/history"
+import "github.com/umenerineri/hai-viewer-backend/api/_pkg/domain/entity/history"
 
 type HistoryRepository interface {
 	Create(history history.History) error

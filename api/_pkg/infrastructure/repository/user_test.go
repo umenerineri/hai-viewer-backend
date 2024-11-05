@@ -8,9 +8,9 @@ import (
 
 	"github.com/google/uuid"
 	"github.com/stretchr/testify/assert"
-	config "github.com/umenerineri/hai-viewer-backend/config"
-	"github.com/umenerineri/hai-viewer-backend/domain/entity/user"
-	impl_repository "github.com/umenerineri/hai-viewer-backend/infrastructure/repository"
+	config "github.com/umenerineri/hai-viewer-backend/api/_pkg/config"
+	"github.com/umenerineri/hai-viewer-backend/api/_pkg/domain/entity/user"
+	impl_repository "github.com/umenerineri/hai-viewer-backend/api/_pkg/infrastructure/repository"
 )
 
 func TestImplUserRepository_Integration(t *testing.T) {

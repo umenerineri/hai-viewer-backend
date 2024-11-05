@@ -3,10 +3,10 @@ package controller
 import (
 	"context"
 
-	"github.com/umenerineri/hai-viewer-backend/application/usecase"
-	impl_repository "github.com/umenerineri/hai-viewer-backend/infrastructure/repository"
+	"github.com/umenerineri/hai-viewer-backend/api/_pkg/application/usecase"
+	impl_repository "github.com/umenerineri/hai-viewer-backend/api/_pkg/infrastructure/repository"
 
-	ogen "github.com/umenerineri/hai-viewer-backend/ogen"
+	ogen "github.com/umenerineri/hai-viewer-backend/api/_pkg/ogen"
 )
 
 func (h *HaiHandler) ViewGet(ctx context.Context) (ogen.ViewGetRes, error) {

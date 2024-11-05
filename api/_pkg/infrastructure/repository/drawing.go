@@ -6,8 +6,8 @@ import (
 
 	fs "firebase.google.com/go/v4/storage"
 
-	config "github.com/umenerineri/hai-viewer-backend/config"
-	"github.com/umenerineri/hai-viewer-backend/infrastructure/impl/storage"
+	config "github.com/umenerineri/hai-viewer-backend/api/_pkg/config"
+	"github.com/umenerineri/hai-viewer-backend/api/_pkg/infrastructure/impl/storage"
 )
 
 type ImplDrawingRepository struct {

@@ -6,8 +6,8 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	ogen "github.com/umenerineri/hai-viewer-backend/ogen"
-	controller "github.com/umenerineri/hai-viewer-backend/presentation/controller"
+	ogen "github.com/umenerineri/hai-viewer-backend/api/_pkg/ogen"
+	controller "github.com/umenerineri/hai-viewer-backend/api/_pkg/presentation/controller"
 )
 
 func TestViewHandler(t *testing.T) {

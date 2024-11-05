@@ -1,25 +1,29 @@
-package main
+package handler
 
 import (
 	"net/http"
 
-	"github.com/umenerineri/hai-viewer-backend/config"
-	"github.com/umenerineri/hai-viewer-backend/middleware"
-	"github.com/umenerineri/hai-viewer-backend/ogen"
-	"github.com/umenerineri/hai-viewer-backend/presentation/controller"
+	"github.com/umenerineri/hai-viewer-backend/api/_pkg/config"
+	"github.com/umenerineri/hai-viewer-backend/api/_pkg/middleware"
+	"github.com/umenerineri/hai-viewer-backend/api/_pkg/ogen"
+	"github.com/umenerineri/hai-viewer-backend/api/_pkg/presentation/controller"
 )
 
-var Handler http.Handler
-
-func init() {
+func Handler(w http.ResponseWriter, req *http.Request) {
+	// Initialize the ogen server with your handlers
 	hdl, err := ogen.NewServer(
 		&controller.HaiHandler{},
 		&config.HaiSecurityHandler{},
 	)
 
 	if err != nil {
-		panic("Failed to initialize server: " + err.Error())
+		http.Error(w, "Failed to initialize server: "+err.Error(), http.StatusInternalServerError)
+		return
 	}
 
-	Handler = middleware.EnableCORS(middleware.LoggingMiddleware(hdl))
+	// Wrap your handler with middleware
+	handler := middleware.EnableCORS(middleware.LoggingMiddleware(hdl))
+
+	// Serve the HTTP request
+	handler.ServeHTTP(w, req)
 }
